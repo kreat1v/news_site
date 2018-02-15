@@ -1,0 +1,124 @@
+body {
+    padding-top: 2.5rem;
+    background-color: #f4f4f4;
+}
+
+.main {
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin-bottom: 40px;
+}
+
+.my-image {
+    margin-bottom: 5px;
+}
+
+.my-carousel {
+    width: 500px;
+}
+
+.my-carousel img {
+    height: 300px;
+    background-color: #ffffff;
+}
+
+.my-carousel a {
+    text-decoration: none;
+    color: #dddddd;
+}
+
+.my-ad {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.my-ad .popover {
+    display: none;
+    position: absolute;
+    top: -20px;
+    left: -110px;
+    z-index: 1;
+    width: 130px;
+}
+
+.my-ad .arrow {
+    top: 40px;
+}
+
+.my-comment {
+    background-color: #e7e7e7;
+    padding: 10px;
+}
+
+.my-comment .like:hover {
+    color: #008000;
+    cursor: pointer;
+}
+
+.my-comment .dislike:hover {
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.my-comment .rating {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.my-comment .star:hover {
+    color: #ffd700;
+}
+
+.my-comment .email {
+    font-size: 13px;
+}
+
+.my-time {
+    margin-right: 10px;
+}
+
+.ui-autocomplete {
+    z-index: 10000 !important;
+    position: fixed !important;
+}
+
+.my-search {
+    width: 210px;
+}
+
+/* Левое навигационное меню админки */
+.sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+}
+
+.sidebar .nav-link {
+    border-radius: 0;
+}
+
+.sidebar .nav {
+    margin-bottom: 20px;
+}
+
+footer {
+    margin-top: 70px;
+}
+
+.my-img-size {
+    width: 150px;
+    margin: 5px;
+}
+
+.my-margin-bottom {
+    margin-bottom: 20px;
+}
