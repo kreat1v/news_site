@@ -26,8 +26,6 @@ class NewsTag extends Base
 
 	public function saveTags($data, $idNews)
 	{
-//		$this->checkFields($data);
-
 		$this->conn->escape($idNews);
 
 		$idNews = intval($idNews);

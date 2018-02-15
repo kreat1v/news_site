@@ -36,6 +36,9 @@ $router = \App\Core\App::getRouter();
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
 	            <?=$data['menu']?>
+                <li class="nav-item <?php if($router->getController(true) == 'Search' && $router->getAction(true) == 'filter') { ?>active<?php } ?>">
+                    <a class="nav-link" href="<?=$router->buildUri('search.filter')?>"><?=__('header.filter')?></a>
+                </li>
                 <li class="nav-item <?php if($router->getController(true) == 'Contacts' && $router->getAction(true) == 'index') { ?>active<?php } ?>">
                     <a class="nav-link" href="<?=$router->buildUri('contacts.index')?>"><?=__('header.contact_us')?></a>
                 </li>
@@ -45,7 +48,7 @@ $router = \App\Core\App::getRouter();
                 </li>
 	            <?php endif; ?>
 	            <?php if (Session::get('role') == 'admin'):?>
-                <li class="nav-item">
+                <li class="nav-item ml-2">
                     <a class="btn btn-outline-success my-2 my-sm-0" href="<?=$router->buildUri('admin.category')?>"><?=__('header.admin')?></a>
                 </li>
 	            <?php endif; ?>

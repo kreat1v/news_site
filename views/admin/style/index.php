@@ -30,11 +30,11 @@ $router = \App\Core\App::getRouter();
         <form action="<?=$router->buildUri('style.edit')?>" method="post">
             <div class="form-group">
                 <label for="color" class="mr-3">Header: </label>
-                <input type="color" id="color" name="colorHeader" value="#ff0000">
+                <input type="color" id="color" name="colorHeader" value="#ff0000" class="form-control">
             </div>
             <div class="form-group">
                 <label for="color2" class="mr-3">Background: </label>
-                <input type="color" id="color2" name="colorBody" value="#ff0000">
+                <input type="color" id="color2" name="colorBody" value="#ff0000" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>

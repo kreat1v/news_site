@@ -5,12 +5,13 @@ return [
 		'do_register' => 'Зарегистрироваться',
 		'homepage' => 'НОВОСТИ',
 		'category' => 'Категории',
+		'filter' => 'Фильтр',
 		'contact_us' => 'Обратная связь',
-		'messages' => 'Ваши сообщения',
+		'messages' => 'Cообщения',
 		'language' => 'Язык',
 		'login' => 'Войти',
 		'profile' => 'Ваш профиль',
-		'admin' => 'Админ - панель',
+		'admin' => 'Админ',
 		'logout' => 'Выйти'
 	],
 

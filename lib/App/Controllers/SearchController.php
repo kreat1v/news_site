@@ -133,4 +133,27 @@ class SearchController extends Base
 			$this->page404();
 		}
 	}
+
+	public function filterAction()
+	{
+		$this->data['category'] = $this->categoryModel->list();
+		$this->data['tags'] = $this->tagsModel->list();
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			try {
+				$this->data['data'] = [
+					'dateFrom' => isset($_POST['dateFrom']) ? $_POST['dateFrom'] : '',
+					'dateTo' => isset($_POST['dateTo']) ? $_POST['dateTo'] : '',
+					'tags' => isset($_POST['tags']) ? $_POST['tags'] : '',
+					'category' => isset($_POST['category']) ? $_POST['category'] : ''
+				];
+
+				$this->data['result'] = $this->newsModel->filter($this->data['data']);
+
+//				App::getSession()->addFlash('Message has been saved');
+			} catch (\Exception $exception) {
+				App::getSession()->addFlash($exception->getMessage());
+			}
+		}
+	}
 }

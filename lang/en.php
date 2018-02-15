@@ -5,12 +5,13 @@ return [
 		'do_register' => 'Register',
 		'homepage' => 'NEWS',
 		'category' => 'Category',
+		'filter' => 'Filter',
 		'contact_us' => 'Contact Us',
-		'messages' => 'Your messages',
+		'messages' => 'Messages',
 		'language' => 'Language',
 		'login' => 'Login',
 		'profile' => 'Profile',
-		'admin' => 'Admin - panel',
+		'admin' => 'Admin',
 		'logout' => 'Logout'
 	],
 

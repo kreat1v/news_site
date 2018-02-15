@@ -1,1 +1,1 @@
-a:2:{s:6:"header";a:1:{s:16:"background-color";s:7:"#414a37";}s:4:"body";a:1:{s:16:"background-color";s:7:"#c0c0c0";}}
+a:2:{s:6:"header";a:1:{s:16:"background-color";s:0:"";}s:4:"body";a:1:{s:16:"background-color";s:0:"";}}
