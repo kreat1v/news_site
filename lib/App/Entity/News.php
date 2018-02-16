@@ -59,7 +59,8 @@ class News extends Base
 			'content',
 			'tag',
 			'img_dir',
-			'views'
+			'views',
+			'analytics'
 		];
 	}
 
@@ -96,6 +97,8 @@ class News extends Base
 		$fieldsTags = $this->getTags()->getTableName();
 		$fieldsCategory = $this->getCategory()->getTableName();
 
+		$analytics = $this->getCategory()->getBy('title', 'Analytics');
+
 		$where = [];
 		$category = [];
 		$tags = [];
@@ -112,6 +115,11 @@ class News extends Base
 
 		if (!empty($filter['category'])) {
 			foreach ($filter['category'] as $idCategory) {
+				if ($idCategory == $analytics['id']) {
+					$where[] = "news.analytics = 1";
+					continue;
+				}
+
 				$idCategory = $this->conn->escape($idCategory);
 				$category[] = $idCategory;
 			}
@@ -120,7 +128,9 @@ class News extends Base
 				$str = implode(', ', $category);
 			}
 
-			$where[] = "news.id_category IN ($str)";
+			if (!empty($str)) {
+				$where[] = "news.id_category IN ($str)";
+			}
 		}
 
 		if (!empty($filter['tags'])) {
@@ -141,12 +151,16 @@ class News extends Base
 		} else {
 			return null;
 		}
+
+		echo $strWhere;
+
 		$sql = "SELECT $fieldsNews.* 
 				FROM $fieldsNews 
 				JOIN $fieldsNewsTag ON $fieldsNews.id = $fieldsNewsTag.id_news 
 				JOIN $fieldsTags ON $fieldsNewsTag.id_tags = $fieldsTags.id 
 				JOIN $fieldsCategory ON $fieldsNews.id_category = $fieldsCategory.id 
-				WHERE 1 $strWhere";
+				WHERE 1 $strWhere 
+				GROUP BY $fieldsNews.id";
 		return $this->conn->query($sql);
 	}
 }

@@ -49,44 +49,60 @@ class NewsController extends Base
 		// получение новости
 		$news = $this->newsModel->getBy('id', $newsId);
 
-		// получение категории
-		$category = $this->categoryModel->getBy('id', $news['id_category']);
+		// проверка - аналитическая статья, или нет
+		if ($news['analytics'] == 1 && !App::getSession()->get('id')) {
+			$arrContent = explode('. ', $news['content']);
+			$content = [];
+			for ($i = 0; $i < 5; $i++) {
+				$content[] = $arrContent[$i];
+			}
+			$content = implode('. ', $content);
 
-		// получение изображений
-		$images = array_values(array_diff(scandir(Config::get('gallery') . $news['img_dir']), ['.', '..']));
-
-		// получение тэгов
-		$newsTag = $this->newsTagModel->list(['id_news' => "$newsId"]);
-		$tagsId = '';
-		foreach ($newsTag as $value) {
-			$tagsId .= $value['id_tags'];
-			$tagsId .= ', ';
-		}
-		$tagsId = trim($tagsId, ', ');
-		$tags = $this->tagsModel->getTags($tagsId);
-
-		// просмотры новости
-		$nowWatching = rand(0, 5);
-		$allWathching = $news['views'] + $nowWatching;
-		$this->newsModel->save(['views' => $allWathching], $newsId);
-
-		// комментарии
-		$comments = $this->commentsModel->getComments('id_news', $newsId);
-		$answers = $this->answersModel->getAnswers($newsId);
-		$vote = $this->voteModel->getVote(App::getSession()->get('id'), $newsId);
-
-		// то, что отдаем
-		if (!empty($news)) {
-			$this->data['news'] = $news;
-			$this->data['gallery'] = $images;
-			$this->data['tags'] = $tags;
-			$this->data['nowWatching'] = $nowWatching;
-			$this->data['category'] = $category;
-			$this->data['comments'] = $comments;
-			$this->data['answers'] = $answers;
-			$this->data['vote'] = $vote;
+			if (!empty($news)) {
+				$this->data['news']['title'] = $news['title'];
+				$this->data['news']['content'] = $content . '.';
+				$this->data['news']['analytics'] = $news['analytics'];
+			}
 		} else {
-			$this->page404();
+			// получение категории
+			$category = $this->categoryModel->getBy('id', $news['id_category']);
+
+			// получение изображений
+			$images = array_values(array_diff(scandir(Config::get('gallery') . $news['img_dir']), ['.', '..']));
+
+			// получение тэгов
+			$newsTag = $this->newsTagModel->list(['id_news' => "$newsId"]);
+			$tagsId = '';
+			foreach ($newsTag as $value) {
+				$tagsId .= $value['id_tags'];
+				$tagsId .= ', ';
+			}
+			$tagsId = trim($tagsId, ', ');
+			$tags = $this->tagsModel->getTags($tagsId);
+
+			// просмотры новости
+			$nowWatching = rand(0, 5);
+			$allWathching = $news['views'] + $nowWatching;
+			$this->newsModel->save(['views' => $allWathching], $newsId);
+
+			// комментарии
+			$comments = $this->commentsModel->getComments('id_news', $newsId);
+			$answers = $this->answersModel->getAnswers($newsId);
+			$vote = $this->voteModel->getVote(App::getSession()->get('id'), $newsId);
+
+			// то, что отдаем
+			if (!empty($news)) {
+				$this->data['news'] = $news;
+				$this->data['gallery'] = $images;
+				$this->data['tags'] = $tags;
+				$this->data['nowWatching'] = $nowWatching;
+				$this->data['category'] = $category;
+				$this->data['comments'] = $comments;
+				$this->data['answers'] = $answers;
+				$this->data['vote'] = $vote;
+			} else {
+				$this->page404();
+			}
 		}
 	}
 }

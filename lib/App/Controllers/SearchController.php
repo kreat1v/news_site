@@ -150,7 +150,6 @@ class SearchController extends Base
 
 				$this->data['result'] = $this->newsModel->filter($this->data['data']);
 
-//				App::getSession()->addFlash('Message has been saved');
 			} catch (\Exception $exception) {
 				App::getSession()->addFlash($exception->getMessage());
 			}

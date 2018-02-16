@@ -48,17 +48,17 @@ class CategoryController extends \App\Controllers\Base
 		}
 	}
 
-	public function deleteAction()
-	{
-		$id = isset($this->params[0]) ? $this->params[0] : null;
-
-		if (!$id) {
-			App::getSession()->addFlash('Missing category id');
-		} else {
-			$this->categoryModel->delete($id);
-			App::getSession()->addFlash('Category has been deleted');
-		}
-
-		App::getRouter()->redirect(App::getRouter()->buildUri('index'));
-	}
+//	public function deleteAction()
+//	{
+//		$id = isset($this->params[0]) ? $this->params[0] : null;
+//
+//		if (!$id) {
+//			App::getSession()->addFlash('Missing category id');
+//		} else {
+//			$this->categoryModel->delete($id);
+//			App::getSession()->addFlash('Category has been deleted');
+//		}
+//
+//		App::getRouter()->redirect(App::getRouter()->buildUri('index'));
+//	}
 }

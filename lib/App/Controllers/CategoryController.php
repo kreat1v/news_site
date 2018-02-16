@@ -33,6 +33,11 @@ class CategoryController extends Base
 		$this->data['category'] = $this->categoryModel->list();
 
 		foreach ($this->data['category'] as $category) {
+			if ($category['title'] == 'Analytics') {
+				$this->data['news'][$category['id']] = $this->newsModel->getSection(5, 0, 'analytics', 1);
+				continue;
+			}
+
 			$this->data['news'][$category['id']] = $this->newsModel->getSection(5, 0, 'id_category', $category['id']);
 		}
 
@@ -45,9 +50,14 @@ class CategoryController extends Base
 	{
 		$page = $this->params[1];
 		$categoryId = $this->params[0];
-		$newsCount = count($this->newsModel->list(['id_category' => $categoryId]));
 
 		$category = $this->categoryModel->getBy('id', $categoryId);
+
+		if ($category['title'] == 'Analytics') {
+			$newsCount = count($this->newsModel->list(['analytics' => 1]));
+		} else {
+			$newsCount = count($this->newsModel->list(['id_category' => $categoryId]));
+		}
 
 		$pag = new Pagination();
 		$pagination = $pag->getLinks(
@@ -62,11 +72,11 @@ class CategoryController extends Base
 		}
 		$offset = $this->data['pagination'] ? $pagination['middle'][$page] : 0;
 
-		$news = $this->newsModel->getSection(
-			Config::get('pagLimit'),
-			$offset,
-			'id_category',
-			$categoryId);
+		if ($category['title'] == 'Analytics') {
+			$news = $this->newsModel->getSection(Config::get('pagLimit'), $offset, 'analytics', 1);
+		} else {
+			$news = $this->newsModel->getSection(Config::get('pagLimit'), $offset, 'id_category', $categoryId);
+		}
 
 		if (!empty($category) && !empty($news) && $page != 0) {
 			$this->data['category'] = $category;

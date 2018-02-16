@@ -47,7 +47,7 @@ $router = \App\Core\App::getRouter();
     <div class="col-12">
 	    <?php foreach ($data['category'] as $category): ?>
         <div class="list-group pt-3">
-            <a href="<?=$router->buildUri('view', [$category['id'], 1])?>" class="list-group-item list-group-item-action active">
+            <a href="<?=$router->buildUri('view', [$category['id'], 1])?>" class="list-group-item list-group-item-action active <?= $category['title'] == 'Analytics' ? 'border-warning bg-warning' : ''?>">
 	            <?=$category['title']?>
             </a>
 	        <?php foreach ($data['news'][$category['id']] as $news): ?>

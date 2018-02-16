@@ -22,6 +22,9 @@ $router = \App\Core\App::getRouter();
             <?php foreach ($data as $news): ?>
                 <li class="list-group-item">
                     <?=$news['id'] . '. ' . $news['title']?>
+	                <?php if ($news['analytics'] == 1): ?>
+                    <span class="badge badge-danger ml-2">analytics</span>
+	                <?php endif; ?>
                     <a class="btn btn-sm btn-success" style="float: right; margin-left: 10px" href="<?=$router->buildUri('edit', [$news['id']])?>">Edit</a>
                 </li>
             <?php endforeach; ?>

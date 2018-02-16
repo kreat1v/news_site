@@ -45,7 +45,9 @@ class NewsController extends \App\Controllers\Base
 				$this->data['news'] = [
 					'id_category' => $_POST['id_category'],
 					'title' => $_POST['title'],
+					'analytics' => empty($_POST['analytics']) ? 0 : 1,
 					'content' => $_POST['content'],
+					'date' => date('Y-m-d H:i:s'),
 					'new' => true
 				];
 				$this->newsModel->save($this->data['news'], $id);
@@ -57,7 +59,7 @@ class NewsController extends \App\Controllers\Base
 				$this->data['tags'] = $_POST['tags'];
 				$this->newsTagModel->saveTags($this->data['tags'], $id);
 
-				if (isset($_FILES['images'])) {
+				if ($_FILES['images']['error'][0] == 0) {
 					$news = $this->newsModel->getBy('id', $id);
 					$nameDir = isset($news[0]['img_dir']) ? $news[0]['img_dir'] : null;
 

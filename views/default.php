@@ -26,7 +26,7 @@ $router = \App\Core\App::getRouter();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
-<body style="background-color: <?=\App\Core\Style::get('body.background-color')?> !important; margin-top: 100px">
+<body style="background-color: <?=\App\Core\Style::get('body.background-color')?> !important;">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" style="background-color: <?=\App\Core\Style::get('header.background-color')?> !important;">
         <a class="navbar-brand" href="<?=$router->buildUri('.')?>"><?=__('header.homepage')?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -161,12 +161,15 @@ $router = \App\Core\App::getRouter();
         <hr>
         <p>&copy; <?=__('header.homepage')?> <?=date('Y')?></p>
     </footer>
+
     <script type="application/javascript" src="/js/admin.js"></script>
+    <script type="application/javascript" src="/js/subscription.js"></script>
     <script type="application/javascript" src="/js/close.js"></script>
     <script type="application/javascript" src="/js/ad.js"></script>
     <script type="application/javascript" src="/js/vote.js"></script>
     <script type="application/javascript" src="/js/comments.js"></script>
     <script type="application/javascript" src="/js/search.js"></script>
     <script type="application/javascript" src="/js/jquery.cookie.js"></script>
+
 </body>
 </html>

@@ -16,7 +16,6 @@ $category = $router->getParams()[0];
     <div class="list-group col-12">
         <?php foreach ($data['news'] as $news): ?>
             <a href="<?=$router->buildUri('news.view', [$news['id']])?>" class="list-group-item list-group-item-action">
-                <?=$news['id']?>
                 <?=$news['title']?>
             </a>
         <?php endforeach; ?>

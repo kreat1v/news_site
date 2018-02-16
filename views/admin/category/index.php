@@ -23,10 +23,9 @@ $router = \App\Core\App::getRouter();
                 <li class="list-group-item">
                     <?=$category['title']?>
                     <?php if ($category['moderation'] == 1): ?>
-                        <span class="badge badge-danger ml-2">moderation</span>
+                    <span class="badge badge-danger ml-2">moderation</span>
                     <?php endif; ?>
-                    <a class="btn btn-sm btn-success" style="float: right; margin-left: 10px" href="<?=$router->buildUri('edit', [$category['id']])?>">Edit</a>
-                    <a class="btn btn-sm btn-warning" style="float: right" onclick="return confirmDelete()" href="<?=$router->buildUri('delete', [$category['id']])?>">Delete</a>
+                    <a class="btn btn-sm btn-success" style="float: right" href="<?=$router->buildUri('edit', [$category['id']])?>">Edit</a>
                 </li>
             <?php endforeach; ?>
         </ul>

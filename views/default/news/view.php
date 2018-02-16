@@ -9,12 +9,21 @@ $router = \App\Core\App::getRouter();
 <div class="row">
     <div class="card mb-3">
         <?php if (isset($data['news']['img_dir'])): ?>
-            <img class="card-img-top h-50 d-inline-block" src="<?=\App\Core\Config::get('imgDir') . $data['news']['img_dir'] . DS . $data['gallery'][0]?>" alt="Card image cap">
+        <img class="card-img-top h-50 d-inline-block" src="<?=\App\Core\Config::get('imgDir') . $data['news']['img_dir'] . DS . $data['gallery'][0]?>" alt="Card image cap">
         <?php endif; ?>
         <div class="card-body">
-            <h5 class="card-title text-right"><?=$data['news']['title']?></h5>
+            <h5 class="card-title text-right">
+	            <?php if ($data['news']['analytics'] == 1): ?>
+                <span class="badge badge-danger mr-2" style="font-size: 15px">analytics</span>
+	            <?php endif; ?>
+                <?=$data['news']['title']?>
+            </h5>
+	        <?php if (isset($data['news']['views'])): ?>
             <i class="fas fa-eye text-right"></i> <?=$data['news']['views']?>
+	        <?php endif; ?>
+	        <?php if (isset($data['nowWatching'])): ?>
             <p class="card-text justify-content-end"><small class="text-muted">now watching <?=$data['nowWatching']?></small></p>
+	        <?php endif; ?>
             <p class="card-text"><?=$data['news']['content']?></p>
 	        <?php if (isset($data['news']['img_dir'])):
                 foreach ($data['gallery'] as $key => $img):
@@ -25,7 +34,9 @@ $router = \App\Core\App::getRouter();
 	        endif; ?>
             <div class="row">
                 <div class="col-12">
+                    <?php if (isset($data['news']['date'])): ?>
                     <p class="card-text text-right"><small class="text-muted"><?=date('d.m.Y H:i', strtotime($data['news']['date']))?></small></p>
+                    <?php endif; ?>
                     <?php if (!empty($data['tags'])):
                         foreach ($data['tags'] as $value): ?>
                             <a href="<?=$router->buildUri('search.tags',[$value['title'], 1])?>" class="badge badge-warning">#<?=$value['title']?></a>
@@ -52,7 +63,11 @@ $router = \App\Core\App::getRouter();
             </form>
         </div>
     <?php else: ?>
+	    <?php if ($data['news']['analytics'] == 1): ?>
+        <p class="pt-2 pb-2"><a href="<?=$router->buildUri('user.login')?>">Sign</a> in to access the full article.</p>
+        <?php else: ?>
         <p class="pt-2 pb-2"><a href="<?=$router->buildUri('user.login')?>">Sign</a> in to leave a comment.</p>
+	    <?php endif; ?>
     <?php endif; ?>
 
     <!-- Вывод комментариев -->

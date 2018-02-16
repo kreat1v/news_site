@@ -1,6 +1,6 @@
 <?php
 
-$isNew = empty($data) || isset($data['new']);
+$isNew = empty($data['news']) || isset($data['news']['new']);
 
 $router = \App\Core\App::getRouter();
 
@@ -20,9 +20,17 @@ $router = \App\Core\App::getRouter();
             </div>
 
             <div class="form-group">
+                <label for="analytics">Analytics?</label>
+                <input type="checkbox" value="1" id="analytics" name="analytics" <?=($isNew || $data['news']['analytics'] ? 'checked' : '')?> />
+            </div>
+
+            <div class="form-group">
                 <label for="category">Category</label>
                 <select name="id_category" class="form-control" id="category">
-			        <?php foreach ($data['categoryList'] as $value): ?>
+			        <?php foreach ($data['categoryList'] as $value):
+                        if ($value['title'] == 'Analytics'):
+                            continue;
+			            endif; ?>
                         <option value="<?=$value['id']?>"
 					        <?php if (isset($data['news']['id_category'])): ?>
 						        <?=$value['id'] == $data['news']['id_category'] ? 'selected' : ''?>
