@@ -9,7 +9,7 @@ $router = \App\Core\App::getRouter();
 <div class="row">
     <div class="card mb-3">
         <?php if (isset($data['news']['img_dir'])): ?>
-        <img class="card-img-top h-50 d-inline-block" src="<?=\App\Core\Config::get('imgDir') . $data['news']['img_dir'] . DS . $data['gallery'][0]?>" alt="Card image cap">
+        <img class="card-img-top d-inline-block" src="<?=\App\Core\Config::get('imgDir') . $data['news']['img_dir'] . DS . $data['gallery'][0]?>" alt="Card image cap">
         <?php endif; ?>
         <div class="card-body">
             <h5 class="card-title text-right">
@@ -32,7 +32,7 @@ $router = \App\Core\App::getRouter();
                 <?php endif;
                 endforeach;
 	        endif; ?>
-            <div class="row">
+            <div class="row clearfix">
                 <div class="col-12">
                     <?php if (isset($data['news']['date'])): ?>
                     <p class="card-text text-right"><small class="text-muted"><?=date('d.m.Y H:i', strtotime($data['news']['date']))?></small></p>
